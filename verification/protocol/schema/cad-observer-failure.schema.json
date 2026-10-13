@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "classification", "processErrorCount", "processErrors", "failure"],
+  "properties": {
+    "schema": {"const": "neco.cad.observer-failure.v1"},
+    "classification": {"type": "string", "minLength": 1, "not": {"enum": ["verified", "refuted", "undetermined", "invalid"]}},
+    "processErrorCount": {"type": "integer", "minimum": 0, "maximum": 1},
+    "processErrors": {"type": "array", "maxItems": 1, "items": {"$ref": "#/$defs/failure"}},
+    "failure": {"$ref": "#/$defs/failure"}
+  },
+  "allOf": [
+    {"if": {"properties": {"classification": {"const": "processFailure"}}}, "then": {"properties": {"processErrorCount": {"const": 1}, "processErrors": {"minItems": 1}}}, "else": {"properties": {"processErrorCount": {"const": 0}, "processErrors": {"maxItems": 0}}}}
+  ],
+  "$defs": {
+    "failure": {"type": "object", "additionalProperties": false, "required": ["kind", "failingOperation", "violatedCondition", "operandProvenance", "witness", "contributingFailures"], "properties": {"kind": {"type": "string", "minLength": 1}, "failingOperation": {"type": "string", "minLength": 1}, "violatedCondition": {"type": "string", "minLength": 1}, "operandProvenance": {"type": "object"}, "witness": {}, "contributingFailures": {"type": "array", "items": {"$ref": "#/$defs/failure"}}}}
+  }
+}

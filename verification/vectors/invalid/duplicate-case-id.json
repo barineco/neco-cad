@@ -1,0 +1,35 @@
+{
+  "schema": "neco.cad.observation-batch.v1",
+  "proofSubjectRef": {
+    "contentDigest": "5cac86de859d80f08f236550f3b40a2e2230e79f2dd106ce0ec18a4eeb226ec6",
+    "versionIdentity": "cad-proof-subject"
+  },
+  "testSetRef": {
+    "contentDigest": "8605b73eb6ba4ee2b8e6c580c550cbf66dfe67eea90e09b758b2d7fcc328893c",
+    "versionIdentity": "cad-finite-test-set"
+  },
+  "cases": [
+    {
+      "caseId": "dup",
+      "input": {
+        "kind": "analyticBrep"
+      },
+      "operationFamily": "exact-chart",
+      "publicObservation": {
+        "kind": "exactChart",
+        "value": {}
+      }
+    },
+    {
+      "caseId": "dup",
+      "input": {
+        "kind": "analyticBrep"
+      },
+      "operationFamily": "exact-chart",
+      "publicObservation": {
+        "kind": "exactChart",
+        "value": {}
+      }
+    }
+  ]
+}

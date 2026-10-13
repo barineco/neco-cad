@@ -1,0 +1,41 @@
+[package]
+name = "neco-cad-view"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Versioned CAD view model and CPU reference projection"
+repository.workspace = true
+documentation = "https://docs.rs/neco-cad-view"
+readme = "README.md"
+keywords = ["cad", "visualization", "geometry"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/contracts.rs", "tests/derivation.rs", "tests/perspective.rs", "README.md", "README-ja.md", "LICENSE"]
+
+[features]
+default = ["std"]
+std = [
+    "neco-brep/std",
+    "neco-bigint/std",
+    "neco-cad/std",
+    "neco-geometry/std",
+    "neco-mesh/std",
+    "neco-nurbs/std",
+    "neco-tessellation/std",
+]
+test-fixtures = ["neco-tessellation/test-fixtures"]
+
+[dependencies]
+libm = { version = "=0.2.16", default-features = false }
+neco-bigint = { path = "../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2", default-features = false }
+neco-brep = { path = "../neco-brep", version = "0.3.0", default-features = false }
+neco-cad = { path = "../neco-cad", version = "0.3.0", default-features = false }
+neco-geometry = { path = "../../../neco-geometry/neco-geometry-main/neco-geometry", version = "0.2.0", default-features = false }
+neco-mesh = { path = "../neco-mesh", version = "0.3.0", default-features = false }
+neco-nurbs = { path = "../neco-nurbs", version = "0.3.0", default-features = false }
+neco-tessellation = { path = "../neco-tessellation", version = "0.3.0", default-features = false }
+
+[dev-dependencies]
+neco-arrangement2d = { path = "../neco-arrangement2d", version = "0.3.0" }
+neco-calculus = { path = "../../../neco-calculus/neco-calculus-main/neco-calculus", version = "0.2.0" }
+neco-algnum = { path = "../../../neco-algebra/neco-algebra-main/neco-algnum", version = "=0.1.2", default-features = false }

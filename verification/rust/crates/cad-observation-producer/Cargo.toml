@@ -1,0 +1,19 @@
+[package]
+name = "cad-observation-producer"
+version = "0.1.0"
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+cad-observation-types = { path = "../cad-observation-types" }
+neco-cad = { path = "../../../../neco-cad" }
+neco-mesh = { path = "../../../../neco-mesh" }
+neco-geometry = { path = "../../../../../../neco-geometry/neco-geometry-main/neco-geometry" }
+neco-calculus = { path = "../../../../../../neco-calculus/neco-calculus-main/neco-calculus" }
+neco-algnum = { path = "../../../../../../neco-algebra/neco-algebra-main/neco-algnum", version = "=0.1.2" }
+neco-bigint = { path = "../../../../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2" }
+serde_json = "1.0"

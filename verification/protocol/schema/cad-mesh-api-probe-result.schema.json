@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "inputDigest", "mesh", "outcome", "api"],
+  "properties": {
+    "schema": {"const": "neco.cad.mesh-api-probe-result.v1"},
+    "inputDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "mesh": {"$ref": "cad-mesh-api-probe-request.schema.json#/$defs/mesh"},
+    "outcome": {"oneOf": [{"$ref": "#/$defs/validated"}, {"$ref": "#/$defs/rejected"}]},
+    "api": {"const": "neco_mesh::validate_surface_mesh/validate_closed_oriented"}
+  },
+  "$defs": {
+    "edgeWitness": {"type": "object", "additionalProperties": false, "required": ["edgeCount"], "properties": {"edgeCount": {"type": "integer", "minimum": 0}}},
+    "pair": {"type": "object", "additionalProperties": false, "required": ["first", "second", "sharedIndexCount", "kind"], "properties": {"first": {"type": "integer", "minimum": 0}, "second": {"type": "integer", "minimum": 0}, "sharedIndexCount": {"type": "integer", "minimum": 0, "maximum": 2}, "kind": {"enum": ["empty", "sharedVertex", "sharedEdgeSegment"]}}},
+    "validated": {"type": "object", "additionalProperties": false, "required": ["kind", "closure", "orientation", "manifold", "examinedPairs"], "properties": {"kind": {"const": "validated"}, "closure": {"$ref": "#/$defs/edgeWitness"}, "orientation": {"$ref": "#/$defs/edgeWitness"}, "manifold": {"$ref": "#/$defs/edgeWitness"}, "examinedPairs": {"type": "array", "items": {"$ref": "#/$defs/pair"}}}},
+    "rejected": {
+      "type": "object", "additionalProperties": false,
+      "required": ["kind", "failureKind", "failure"],
+      "properties": {"kind": {"const": "rejected"}, "failureKind": {"enum": ["degenerateTriangle", "openEdge", "orientationMismatch", "nonManifoldEdge", "selfIntersection"]}, "failure": {"type": "object"}},
+      "allOf": [
+        {"if": {"properties": {"failureKind": {"const": "degenerateTriangle"}}}, "then": {"properties": {"failure": {"type": "object", "additionalProperties": false, "required": ["triangleIndex"], "properties": {"triangleIndex": {"type": "integer", "minimum": 0}}}}}},
+        {"if": {"properties": {"failureKind": {"enum": ["openEdge", "orientationMismatch"]}}}, "then": {"properties": {"failure": {"type": "object", "additionalProperties": false, "required": ["firstVertex", "secondVertex"], "properties": {"firstVertex": {"type": "integer", "minimum": 0}, "secondVertex": {"type": "integer", "minimum": 0}}}}}},
+        {"if": {"properties": {"failureKind": {"const": "nonManifoldEdge"}}}, "then": {"properties": {"failure": {"type": "object", "additionalProperties": false, "required": ["firstVertex", "secondVertex", "incidenceCount"], "properties": {"firstVertex": {"type": "integer", "minimum": 0}, "secondVertex": {"type": "integer", "minimum": 0}, "incidenceCount": {"type": "integer", "minimum": 0}}}}}},
+        {"if": {"properties": {"failureKind": {"const": "selfIntersection"}}}, "then": {"properties": {"failure": {"type": "object", "additionalProperties": false, "required": ["first", "second", "kind"], "properties": {"first": {"type": "integer", "minimum": 0}, "second": {"type": "integer", "minimum": 0}, "kind": {"enum": ["empty", "sharedVertex", "sharedEdgeSegment", "nonPermittedCrossing", "coplanarOverlap", "distinctIndexCoincidentContact", "duplicateFace", "indeterminate"]}}}}}}
+      ]
+    }
+  }
+}

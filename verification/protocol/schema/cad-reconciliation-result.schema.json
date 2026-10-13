@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "classification", "digest", "checkerResultDigest", "resultMatched"],
+  "properties": {
+    "schema": {"const": "neco.cad.reconciliation-result.v1"},
+    "classification": {"enum": ["batchInvalid", "caseInvalid", "caseVerdicts"]},
+    "digest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "checkerResultDigest": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "resultMatched": {"const": true}
+  },
+  "x-invariants": ["actual batch bytes SHA256 equals checker result digest", "every result field and verdict is decoded strictly", "cases have the same nonempty unique IDs in identical count and order", "batchInvalid applies only to non-enumerable input; canonical enumerated invalid cases use caseInvalid"]
+}

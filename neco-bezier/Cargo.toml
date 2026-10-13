@@ -1,0 +1,23 @@
+[package]
+name = "neco-bezier"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Exact evaluation of Bézier curves and surfaces over real algebraic coordinates"
+repository.workspace = true
+documentation = "https://docs.rs/neco-bezier"
+keywords = ["bezier", "cad", "geometry"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/bezier_aggregate.rs", "tests/bezier_containment.rs", "tests/bezier_definition.rs", "tests/bezier_evaluation.rs", "tests/bezier_split.rs", "tests/public_api.rs", "README.md", "README-ja.md", "LICENSE"]
+readme = "README.md"
+
+[features]
+default = ["std"]
+std = ["neco-geometry/std", "neco-calculus/std", "neco-algnum/std", "neco-bigint/std"]
+
+[dependencies]
+neco-geometry = { path = "../../../neco-geometry/neco-geometry-main/neco-geometry", version = "0.2.0", default-features = false }
+neco-calculus = { path = "../../../neco-calculus/neco-calculus-main/neco-calculus", version = "0.2.0", default-features = false }
+neco-algnum = { path = "../../../neco-algebra/neco-algebra-main/neco-algnum", version = "=0.1.2", default-features = false }
+neco-bigint = { path = "../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2", default-features = false }

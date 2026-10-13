@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object", "additionalProperties": false,
+  "required": ["schema", "mesh", "source"],
+  "properties": {
+    "schema": {"const": "neco.cad.mesh-api-probe-request.v1"},
+    "mesh": {"$ref": "#/$defs/mesh"},
+    "source": {"type": "object", "additionalProperties": false, "required": ["identity", "revision"], "properties": {"identity": {"type": "string", "minLength": 1}, "revision": {"type": "string", "minLength": 1}}}
+  },
+  "$defs": {
+    "dyadic": {"type": "object", "additionalProperties": false, "required": ["integer", "exponent"], "properties": {"integer": {"type": "string", "pattern": "^(0|-?[1-9][0-9]*)$"}, "exponent": {"type": "integer", "minimum": 0, "maximum": 1022}}},
+    "point": {"type": "object", "additionalProperties": false, "required": ["x", "y", "z"], "properties": {"x": {"$ref": "#/$defs/dyadic"}, "y": {"$ref": "#/$defs/dyadic"}, "z": {"$ref": "#/$defs/dyadic"}}},
+    "triangle": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"type": "integer", "minimum": 0}},
+    "mesh": {"type": "object", "additionalProperties": false, "required": ["vertices", "triangles"], "properties": {"vertices": {"type": "array", "items": {"$ref": "#/$defs/point"}}, "triangles": {"type": "array", "items": {"$ref": "#/$defs/triangle"}}}}
+  },
+  "x-invariants": ["canonical sorted UTF-8 JSON without duplicate keys or whitespace", "each dyadic coordinate is exactly representable as finite non-underflowing binary64", "absolute dyadic numerator is at most 2^53"]
+}

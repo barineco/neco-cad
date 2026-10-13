@@ -1,0 +1,20 @@
+[package]
+name = "neco-cdt"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Constrained Delaunay triangulation"
+repository.workspace = true
+documentation = "https://docs.rs/neco-cdt"
+readme = "README.md"
+keywords = ["triangulation", "delaunay", "mesh"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/triangulate.rs", "README.md", "README-ja.md", "LICENSE"]
+
+[features]
+default = ["std"]
+std = ["neco-mesh/std"]
+
+[dependencies]
+neco-mesh = { path = "../neco-mesh", version = "0.3.0", default-features = false }

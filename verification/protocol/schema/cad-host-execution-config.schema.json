@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["workingDirectory", "temporaryDirectory", "reportDirectory", "domains", "controlProbePath"],
+  "properties": {
+    "workingDirectory": {"type": "string", "pattern": "^/", "minLength": 1},
+    "temporaryDirectory": {"$ref": "#/$defs/path"},
+    "reportDirectory": {"$ref": "#/$defs/path"},
+    "domains": {"type": "object", "additionalProperties": false, "required": ["neco.cad"], "properties": {"neco.cad": {"type": "object", "additionalProperties": false, "required": ["producerPath", "checkerPath"], "properties": {"producerPath": {"$ref": "#/$defs/path"}, "checkerPath": {"$ref": "#/$defs/path"}}}}},
+    "controlProbePath": {"$ref": "#/$defs/path"},
+    "shardParallelism": {"type": "integer", "minimum": 1}
+  },
+  "$defs": {
+    "path": {"type": "string", "minLength": 1}
+  }
+}

@@ -1,0 +1,22 @@
+[workspace]
+resolver = "2"
+members = [
+    "neco-arrangement2d",
+    "neco-bezier",
+    "neco-brep",
+    "neco-cad-import",
+    "neco-cad",
+    "neco-cdt",
+    "neco-mesh",
+    "neco-nurbs",
+    "neco-stl",
+    "neco-tessellation",
+    "neco-cad-view",
+]
+
+[workspace.package]
+version = "0.3.0"
+edition = "2021"
+rust-version = "1.82"
+license = "MIT"
+repository = "https://github.com/barineco/neco-cad"

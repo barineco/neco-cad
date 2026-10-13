@@ -1,0 +1,31 @@
+[package]
+name = "neco-cad-import"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Certified region import from mesh and analytic shells"
+repository.workspace = true
+documentation = "https://docs.rs/neco-cad-import"
+readme = "README.md"
+keywords = ["cad", "import", "mesh", "geometry"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/import.rs", "tests/import_support/fixtures.rs", "tests/public_api.rs", "README.md", "README-ja.md", "LICENSE"]
+
+[features]
+default = ["std"]
+std = ["neco-brep/std", "neco-mesh/std", "neco-geometry/std"]
+
+[dependencies]
+neco-brep = { path = "../neco-brep", version = "0.3.0", default-features = false }
+neco-mesh = { path = "../neco-mesh", version = "0.3.0", default-features = false }
+neco-geometry = { path = "../../../neco-geometry/neco-geometry-main/neco-geometry", version = "0.2.0", default-features = false }
+neco-bigint = { path = "../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2", default-features = false }
+
+[dev-dependencies]
+neco-algnum = { path = "../../../neco-algebra/neco-algebra-main/neco-algnum", version = "=0.1.2", default-features = false }
+neco-bigint = { path = "../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2", default-features = false }
+neco-calculus = { path = "../../../neco-calculus/neco-calculus-main/neco-calculus", version = "0.2.0", default-features = false }
+neco-expr = { path = "../../../neco-algebra/neco-algebra-main/neco-expr", version = "=0.2.0", default-features = false }
+neco-nurbs = { path = "../neco-nurbs", version = "0.3.0", default-features = false }
+neco-arrangement2d = { path = "../neco-arrangement2d", version = "0.3.0", default-features = false }

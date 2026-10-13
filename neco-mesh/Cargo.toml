@@ -1,0 +1,21 @@
+[package]
+name = "neco-mesh"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Validated surface mesh types"
+repository.workspace = true
+documentation = "https://docs.rs/neco-mesh"
+readme = "README.md"
+keywords = ["mesh", "geometry", "cad"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/surface.rs", "README.md", "README-ja.md", "LICENSE"]
+
+[features]
+default = ["std"]
+std = []
+
+[dependencies]
+
+[dev-dependencies]

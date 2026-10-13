@@ -1,0 +1,17 @@
+name = "neco-cad-verify"
+version = "0.1.0"
+defaultTargets = ["NecoCadVerify", "neco-cad-checker"]
+
+[leanOptions]
+autoImplicit = false
+
+[[require]]
+name = "neco-geometry-verify"
+path = "../../../../neco-geometry/neco-geometry-main/verification/lean"
+
+[[lean_lib]]
+name = "NecoCadVerify"
+
+[[lean_exe]]
+name = "neco-cad-checker"
+root = "NecoCadVerifyTests"

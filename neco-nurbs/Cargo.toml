@@ -1,0 +1,34 @@
+[package]
+name = "neco-nurbs"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+description = "Exact evaluation and fitting of NURBS curves and surfaces"
+repository.workspace = true
+documentation = "https://docs.rs/neco-nurbs"
+keywords = ["nurbs", "cad", "geometry"]
+categories = ["mathematics", "no-std"]
+include = ["Cargo.toml", "src/**/*.rs", "tests/failure_api.rs", "tests/nurbs_definition.rs", "tests/nurbs_evaluation.rs", "tests/nurbs_fitting.rs", "tests/public_api.rs", "README.md", "README-ja.md", "LICENSE"]
+readme = "README.md"
+
+[features]
+default = ["std"]
+std = [
+    "neco-bezier/std",
+    "neco-calculus/std",
+    "neco-geometry/std",
+    "neco-linear-exact/std",
+    "neco-linear-types/std",
+    "neco-algnum/std",
+    "neco-bigint/std",
+]
+
+[dependencies]
+neco-bezier = { path = "../neco-bezier", version = "0.3.0", default-features = false }
+neco-calculus = { path = "../../../neco-calculus/neco-calculus-main/neco-calculus", version = "0.2.0", default-features = false }
+neco-algnum = { path = "../../../neco-algebra/neco-algebra-main/neco-algnum", version = "=0.1.2", default-features = false }
+neco-bigint = { path = "../../../neco-algebra/neco-algebra-main/neco-bigint", version = "=0.1.2", default-features = false }
+neco-geometry = { path = "../../../neco-geometry/neco-geometry-main/neco-geometry", version = "0.2.0", default-features = false }
+neco-linear-exact = { path = "../../../neco-algebra/neco-algebra-main/neco-linear-exact", version = "=0.2.0", default-features = false }
+neco-linear-types = { path = "../../../neco-algebra/neco-algebra-main/neco-linear-types", version = "=0.1.1", default-features = false }
